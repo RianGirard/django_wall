@@ -76,14 +76,12 @@ def email_regex(request, email):
     return render(request, 'partials/email.html', {"found":found})      # found must be a dict datatype
 
 def age_valid(request, birthday):
-    print('heya')
     found = 8
     dob = datetime.strptime(birthday, '%Y-%m-%d')
-    def convert_dob_to_age(born):
+    def convert_dob_to_age(born):       # method: https://moonbooks.org/Articles/How-to-get-the-age-from-a-date-of-birth-DOB-in-python-/
         today = date.today()
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     age = convert_dob_to_age(dob)
-    print(age)
     if age < 13:
         found = 7
     return render(request, 'partials/birthday.html', {"found":found})

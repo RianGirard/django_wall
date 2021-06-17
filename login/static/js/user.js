@@ -23,7 +23,7 @@
     }, false);
 })();
 
-
+// These JQuery validations are for Email and Birthday fields to give AJAX responses as user types
 $(document).ready(function(){
     $('#email').keyup(function(){
         let words = $(this)[0].value        // jquery "keyup" creates a list, as opposed to just a value, so we need to grab the [0] position's value
