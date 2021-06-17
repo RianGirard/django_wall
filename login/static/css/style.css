@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+}
+.first {
+    margin: 20px 0px;
+}
+
+.btn-first {
+    margin: 10px 0px 0px 20px;
+}
+.top, .bottom {
+    flex: 1;
+}
+.messages {
+    margin: 30px;
+}
+.error {
+    color: red;
+}
+.success {
+    color: green;
+    list-style: none;
+}
+.logout {
+    float: right;
+}
+#success_contain {
+    max-width: 800px;
+}

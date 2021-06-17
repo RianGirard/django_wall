@@ -1,0 +1,32 @@
+<style type="text/css" media="screen">
+.success {
+    color: green;
+    font-size: 10pt;
+}
+.error {
+    color: red;
+    font-size: 10pt;
+}
+.first {
+    margin-right: 10px;
+}
+</style>
+
+{% if found == 1 %}
+<p class="error first">Email already in database. Choose another</p>
+{% endif %}
+{% if found == 2 %}
+<p class="success first"></p>
+{% endif %}
+{% if found == 3 %}
+<p class="success first"></p>     <!-- Number 3 is here to deal with null text entry cases>> -->
+{% endif %}
+{% if found == 4 %}
+<p class="error">Use correct email format</p>
+{% endif %}
+{% if found == 5 %}
+<p class="success">Email format good</p>
+{% endif %}
+{% if found == 6 %}
+<p class="success"></p>     <!-- Number 6 is here to deal with null text entry cases>> -->
+{% endif %}

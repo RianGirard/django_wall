@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body> 
+    <div class="container">
+        <div class="top">
+            <h1 class="bottom">Registration</h1>
+            <form method="POST" action="register" name="registration" class="needs-validation" novalidate>  <!--custom validation messages-->
+                {% csrf_token %}
+                <div class="row first">
+                    <div class="col">
+                        <input type="text" class="form-control" name="first_name" autocomplete="off" placeholder="First name" pattern="^[A-Za-z\s.]{2,}$" required=""> <!--regex pattern-->
+                        <div class="invalid-feedback">      <!--custom message-->
+                            <p>First Name must be alpha characters only and contain at least 2 characters</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="last_name" autocomplete="off" placeholder="Last name" pattern="^[A-Za-z\s.]{2,}$" required>
+                        <div class="invalid-feedback">
+                            <p>Last Name must be alpha characters only and contain at least 2 characters</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row first">
+                    <div class="col">
+                        <input type="text" class="form-control" name="email" autocomplete="off" placeholder="Email" id="email" required>
+                        <div id="email_valid"></div>
+                        <div id="email_regex"></div>
+                    </div>
+                    <div class="col">
+                        <input type="date" class="form-control" name="birthday" id="birthday" required>
+                        <div id="birthday_valid"></div>
+                    </div>
+                </div>
+                <div class="row first">
+                    <div class="col">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" pattern="^[a-zA-Z0-9!@#$%^&*)(']{8,}$" required>
+                        <div class="invalid-feedback">
+                            <p>Passwords do not match: 8 chars min</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input type="password" class="form-control" name="password_conf" id="password2" placeholder="Confirm Password" pattern="^[a-zA-Z0-9!@#$%^&*)(']{8,}$" required>
+                        <div class="invalid-feedback">
+                            <p>Passwords do not match</p>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-right btn-first" value="Create">
+            </form>
+        </div>
+        <div class="bottom">
+            <h1>Login</h1>
+            <form method="POST" action="login">
+                {% csrf_token %}
+                <div class="row first">
+                    <div class="col">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="row first">
+                    <div class="col">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-right btn-first" value="Login">
+            </form>
+        </div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    <!-- CSS errors with message.tags -->
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/user.js' %}"></script>
+</body>
+</html>

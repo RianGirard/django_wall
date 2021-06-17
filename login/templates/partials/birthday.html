@@ -1,0 +1,20 @@
+<style type="text/css" media="screen">
+    .success {
+        color: green;
+        font-size: 10pt;
+    }
+    .error {
+        color: red;
+        font-size: 10pt;
+    }
+    .first {
+        margin-right: 10px;
+    }
+    </style>
+    
+    {% if found == 7 %}
+    <p class="error first">Sorry, site is for ages 13 and up</p>
+    {% endif %}
+    {% if found == 8 %}
+    <p class="success first">Age 13 and up!</p>
+    {% endif %}
