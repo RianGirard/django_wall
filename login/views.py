@@ -16,7 +16,7 @@ def login(request):
         this_user = User.objects.filter(email=request.POST['email'])[0]
         if bcrypt.checkpw(request.POST['password'].encode(), this_user.password.encode()):
             request.session['user_id'] = this_user.id
-            messages.success(request, "You made it!")
+            # messages.success(request, "You made it!")
             return redirect("/success")
         messages.error(request, "Please enter a valid email and password")
     return redirect('/')
@@ -38,7 +38,7 @@ def register(request):
             password=pw_hash
         )
         request.session['user_id']= new_user.id
-        messages.success(request, "You made it!")
+        # messages.success(request, "You made it!")
         return redirect('/success')
 
     return redirect('/')
@@ -46,10 +46,12 @@ def register(request):
 def success(request):
     if 'user_id' not in request.session:
         return redirect("/")
-    context = {
-        "user" : User.objects.get(id=request.session['user_id']),
-    }
-    return render(request, "success.html", context)
+    return redirect("/wall")    
+    # this section turned off after "wall" app built
+    # context = {
+    #     "user" : User.objects.get(id=request.session['user_id']),
+    # }
+    # return render(request, "success.html", context)
 
 def email_valid_null(request):
     # this is here to deal with null text entry cases
@@ -86,8 +88,5 @@ def age_valid(request, birthday):
         found = 7
     return render(request, 'partials/birthday.html', {"found":found})
 
-def logout(request):
-    request.session.flush()
-    return redirect("/")
 
 # Create your views here.

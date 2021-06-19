@@ -2,7 +2,6 @@ from django.db import models
 import re
 from datetime import datetime, date
 
-
 class UserManager(models.Manager):
     def user_validator(self, postData):
         errors = {}
@@ -55,6 +54,8 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()     # replace the default value of objects = models.Manager() to custom version for validations
+    # messages = a list of messages associated with a given User
+    # user_comments = a list of comments associated with a given user
 
     def __repr__ (self):
         return f"<User Name: {self.fname} {self.lname} {self.birthday}>"

@@ -1,0 +1,32 @@
+.page-header {
+    border-bottom: 1px black solid;
+}
+.right {
+    float:right;
+}
+.logoff {
+    font-size: 12pt;
+}
+.form-label {
+    font-size: 20pt;
+}
+.bump {
+    margin-top: 50px;
+}
+.indent {
+    padding-left: 10px;
+}
+.big-indent {
+    padding-left: 50px;
+}
+.pad-right {
+    padding-right: 50px;
+}
+.highlight-message {
+    font-weight: bold;
+    color: blue;
+}
+.highlight-comment {
+    font-weight: bold;
+    color: green;
+}

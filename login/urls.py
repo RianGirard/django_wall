@@ -11,5 +11,4 @@ urlpatterns = [
     path ('email_regex/', views.email_regex_null),
     path ('email_regex/<str:email>', views.email_regex),
     path ('age_valid/<str:birthday>', views.age_valid),
-    path ('logout', views.logout),
 ]
