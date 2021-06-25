@@ -1,0 +1,17 @@
+<style type="text/css" media="screen">
+.success {
+        color: green;
+        font-size: 10pt;
+    }
+.error {
+        color: red;
+        font-size: 10pt;
+    }
+</style>
+
+{% if path == 1 %}
+<p class="error">Sorry, These Can Only Be Deleted in First 30 Minutes</p>
+{% endif %}
+{% if path == 2 %}
+<p class="success">Item Deleted</p>
+{% endif %}

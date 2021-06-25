@@ -16,7 +16,7 @@
         </h1>
     </div>
     <div class="container">
-        <div id="form-message" class="bump">
+        <div class="bump">
             <form action="enter_message" method="POST">
                 {% csrf_token %}
                 <div class="input-group">
@@ -25,35 +25,49 @@
                     </div>
                     <textarea class="form-control" aria-label="With textarea" name="message" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2 right">Post Message</button>
+                <button type="submit" class="btn btn-primary mb-2 right">Post New Message</button>
             </form>
         </div>
-        <div id="display-message" class="bump">
+        <div class="bump">
             {% for message in all_messages %}
             <p class="bump highlight-message">{{message.user.fname}} {{message.user.lname}} - {{message.updated_at}}</p>
             <p class="indent">{{message.message}}</p>
 
                     {% if message.user.id == user.id %}
-                        <input type="hidden" name="message_id" id="message_id" value="{{message.id}}">
-                        <button type="submit" class="btn btn-secondary btn-sm right" id="delete_message">Delete Message</button>
+                    <form class="delete_message">
+                        {% csrf_token %}
+                        <input type="hidden" name="message_id" class="message_id" value="{{message.id}}">
+                        <button type="submit" class="btn btn-secondary btn-sm right">Delete Your Message</button>
+                        <div class="delete_response bump right"></div>
+                    </form>
                     {% endif %}
 
-                {% for comment in message.message_comments.all reversed %}
+                {% for comment in message.message_comments.all %}    <!-- add 'reversed' at the end to reverse sort order-->
                 <p class="indent highlight-comment bump">{{comment.user.fname}} {{comment.user.lname}} - {{comment.updated_at}}</p>
                 <p class="big-indent">{{comment.comment}}</p>
+                
+                    {% if comment.user.id == user.id %}
+                    <form class="delete_comment">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment_id" class="comment_id" value="{{comment.id}}">
+                        <button type="submit" class="btn btn-secondary btn-sm right">Delete Your Comment</button>
+                        <div class="delete_response bump right"></div>
+                    </form>
+                    {% endif %}
+                
                 {% endfor %}
 
-                <div id="form-comment">
-                    <form action="enter_comment" method="POST">
+                <div class="bump">
+                    <form class="enter_comment">
                         {% csrf_token %}
                         <div class="input-group">
                             <div class="input-group-prepend big-indent">
                                 <span class="input-group-text">Enter a comment:</span>
                             </div>
-                            <textarea class="form-control" aria-label="With textarea" name="comment" id="comment" required></textarea>
+                            <textarea class="form-control" aria-label="With textarea" name="comment" required></textarea>
                         </div>
                         <input type="hidden" name="message_id" value="{{message.id}}">
-                        <button type="submit" class="btn btn-success btn-sm mb-2 right">Post Comment</button>
+                        <button type="submit" class="btn btn-success btn-sm mb-2 right">Post New Comment</button>
                     </form>
                 </div>
             {% endfor %}

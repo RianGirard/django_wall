@@ -1,14 +1,46 @@
 $(document).ready(function(){
-    $('#delete_message').click(function(){
-        console.log('hi')
-        let message = $('#message_id').value        // jquery "submit" creates a list, as opposed to just a value, so we need to grab the [0] position value
-        console.log(message)
+    $('.delete_message').click(function(e){
+        e.preventDefault()
         $.ajax({
-            method: "GET",
-            url: "delete_message/"+message,
-            })
+            url: 'delete_message',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(serverResponse){
+                if ((serverResponse).indexOf('Item Deleted') > -1){
+                    location.reload();
+                } else {
+                    $('.delete_response').html(serverResponse)
+                }
+            }
+        })
     })
 
+    $('.delete_comment').click(function(e){
+        e.preventDefault()
+        $.ajax({
+            url: 'delete_comment',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(serverResponse){
+                if ((serverResponse).indexOf('Item Deleted') > -1){
+                    location.reload();
+                } else {
+                    $('.delete_response').html(serverResponse)
+                }
+            }
+        })
+    })
 
+    $('.enter_comment').submit(function(e){
+        e.preventDefault()
+        $.ajax({
+            url: 'enter_comment',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(serverResponse){
+                location.reload();
+            }
+        })
+    })
 
 })
