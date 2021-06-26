@@ -1,1 +1,5 @@
 /django_wall/.env
+__pycache__/
+.vscode/
+venv/
+db.sqlite3
